@@ -7,7 +7,7 @@ const Game = (location) => {
 	const [ ownTiles, setTiles ] = useState([]);
 	const [ opponentCol, setColour ] = useState([]);
 	const [ user, setUser ] = useState('');
-	//const [ randTile, setRandTile ] = useState([]);
+	const [ newRandTile, setNewRandTile ] = useState('');
 	const ENDPOINT = 'localhost:5000';
 
 	useEffect(
@@ -25,28 +25,24 @@ const Game = (location) => {
 
 	useEffect(() => {
 		socket.on('newRandNum', (randTile) => {
-			setTiles([ ...ownTiles, randTile ]);
+			//newRandTile = setNewRandTile('5');
+			console.log('newRandTile', randTile);
+			setTiles(randTile);
 		});
-	});
 
-	useEffect(() => {
 		socket.on('grabTiles', (newTiles) => {
-			console.log('newTiles', newTiles);
 			setTiles(newTiles);
 		});
 		socket.on('grabColour', (tileColour) => {
 			setColour((opponentCol) => [ ...opponentCol, tileColour ]);
 		});
-	});
+	}, []);
 
 	const randomTile = (event) => {
 		event.preventDefault();
 
 		socket.emit('randomTile');
 	};
-
-	console.log(opponentCol);
-	console.log(ownTiles);
 
 	return (
 		<div>
