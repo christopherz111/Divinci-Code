@@ -26,11 +26,13 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('randomTile', () => {
+		if (tiles.length === 0) {
+			return null;
+		}
 		const randTile = tiles.splice(-1);
 		const newRandTiles = shuffle(newTiles.concat(randTile));
 		newTiles = newTiles.concat(randTile);
 		io.to(socket.id).emit('newRandNum', newRandTiles);
-		console.log('randTiles', { newRandTiles });
 	});
 
 	socket.on('disconnect', () => {
