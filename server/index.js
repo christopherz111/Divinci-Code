@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
 	const newRandTiles = shuffle(newTiles);
 	socket.on('startGame', () => {
 		io.to(socket.id).emit('grabTiles', newTiles);
-
+		console.log('newTiles', newTiles);
 		for (var i = 0; i < newTiles.length; i++) {
 			tileColour.push(newTiles[i].colour);
 		}

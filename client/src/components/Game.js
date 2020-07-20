@@ -25,17 +25,17 @@ const Game = (location) => {
 	useEffect(() => {
 		socket.on('newRandNum', (randTile) => {
 			//newRandTile = setNewRandTile('5');
-			setTiles(randTile);
+			setTiles([ 5 ]);
 			console.log('ownTiles', ownTiles);
 		});
 
 		socket.on('grabTiles', (newTiles) => {
-			setTiles(newTiles);
+			setTiles((oldTiles) => [ ...oldTiles, newTiles ]);
 			console.log('ownTiles', ownTiles);
-			console.log('newTiles', newTiles);
 		});
 		socket.on('grabColour', (tileColour) => {
-			setColour((opponentCol) => [ ...opponentCol, tileColour ]);
+			setColour((colour) => [ ...colour, tileColour ]);
+			console.log('colour', colour);
 		});
 	}, []);
 
@@ -44,7 +44,7 @@ const Game = (location) => {
 
 		socket.emit('randomTile');
 	};
-
+	console.log('ownTiles', ownTiles);
 	return (
 		<div>
 			game

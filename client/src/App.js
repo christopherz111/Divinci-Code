@@ -4,7 +4,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Game from './components/Game/Game';
+import Game from './components/Game';
 
 //Creating app.js component
 const App = () => (
