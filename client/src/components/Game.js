@@ -24,18 +24,14 @@ const Game = (location) => {
 
 	useEffect(() => {
 		socket.on('newRandNum', (randTile) => {
-			//newRandTile = setNewRandTile('5');
-			setTiles([ 5 ]);
-			console.log('ownTiles', ownTiles);
+			setTiles([ ownTiles ]);
 		});
 
 		socket.on('grabTiles', (newTiles) => {
 			setTiles((oldTiles) => [ ...oldTiles, newTiles ]);
-			console.log('ownTiles', ownTiles);
 		});
 		socket.on('grabColour', (tileColour) => {
 			setColour((colour) => [ ...colour, tileColour ]);
-			console.log('colour', colour);
 		});
 	}, []);
 

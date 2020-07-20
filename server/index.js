@@ -33,6 +33,7 @@ io.on('connection', (socket) => {
 		const newRandTiles = shuffle(newTiles.concat(randTile));
 		newTiles = newTiles.concat(randTile);
 		io.to(socket.id).emit('newRandNum', newRandTiles);
+		console.log('newRandTiles', newRandTiles);
 	});
 
 	socket.on('disconnect', () => {
